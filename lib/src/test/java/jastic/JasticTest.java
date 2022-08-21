@@ -10,7 +10,7 @@ import static jastic.Jastic.*;
 
 class JasticTest {
     @Test void renderTag() {
-        Renderer r = new Renderer();
+        HTMLRenderer r = new HTMLRenderer();
         String actual = r.render(tag("test", text("foobar")));
         Assertions.assertEquals("<test>\n" +
                 "\tfoobar\n" +
@@ -18,7 +18,7 @@ class JasticTest {
     }
 
     @Test void render() {
-        Renderer r = new Renderer();
+        HTMLRenderer r = new HTMLRenderer();
         String actual = r.render(html(
                 body(
                         text("Hello, World!")
@@ -32,7 +32,7 @@ class JasticTest {
     }
 
     @Test void renderTagWithId() {
-        Renderer r = new Renderer();
+        HTMLRenderer r = new HTMLRenderer();
         String actual = r.render(tag("test", attributes(id("bar"), className("foo")), text("foobar")));
         Assertions.assertEquals("<test id=\"bar\" class=\"foo\">\n" +
                 "\tfoobar\n" +

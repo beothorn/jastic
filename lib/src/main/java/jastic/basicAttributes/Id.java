@@ -1,19 +1,19 @@
 package jastic.basicAttributes;
 
 import jastic.Attribute;
-import jastic.Renderer;
+import jastic.HTMLRenderer;
 
 import java.util.Map;
 
 public class Id implements Attribute {
-    private String value;
+    private final String value;
 
     public Id(String value){
         this.value = value;
     }
 
     @Override
-    public String render(Map<String, Object> context, Renderer r) {
+    public String render(Map<String, Object> context, HTMLRenderer r) {
         return r.render(context, this);
     }
 

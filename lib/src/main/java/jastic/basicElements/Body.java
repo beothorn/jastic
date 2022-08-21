@@ -3,13 +3,13 @@ package jastic.basicElements;
 import jastic.Attribute;
 import jastic.DomElement;
 import jastic.Renderable;
-import jastic.Renderer;
+import jastic.HTMLRenderer;
 
 import java.util.Map;
 
 public class Body implements DomElement {
-    private Attribute[] attributes;
-    private Renderable[] childrenElements;
+    private final Attribute[] attributes;
+    private final Renderable[] childrenElements;
 
     public Body(final Attribute[] attributes, final Renderable[] childrenElements) {
         this.attributes = attributes;
@@ -25,7 +25,7 @@ public class Body implements DomElement {
         return childrenElements;
     }
     @Override
-    public String render(Map<String, Object> context, Renderer r) {
+    public String render(Map<String, Object> context, HTMLRenderer r) {
         return r.render(context, this);
     }
 }

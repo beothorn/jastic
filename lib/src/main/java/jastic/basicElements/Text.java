@@ -1,13 +1,13 @@
 package jastic.basicElements;
 
 import jastic.Renderable;
-import jastic.Renderer;
+import jastic.HTMLRenderer;
 
 import java.util.Map;
 
 public class Text implements Renderable {
 
-    private String value;
+    private final String value;
 
     public Text(String value) {
         this.value = value;
@@ -18,7 +18,7 @@ public class Text implements Renderable {
     }
 
     @Override
-    public String render(Map<String, Object> context,  Renderer r) {
+    public String render(Map<String, Object> context,  HTMLRenderer r) {
         return r.render(context, this);
     }
 }

@@ -11,9 +11,8 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class Renderer {
+public class HTMLRenderer {
 
     public String render(Html html) {
         return render(Map.of(), html);

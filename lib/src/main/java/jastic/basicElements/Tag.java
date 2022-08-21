@@ -1,16 +1,15 @@
 package jastic.basicElements;
 
 import jastic.Attribute;
-import jastic.DomElement;
 import jastic.Renderable;
-import jastic.Renderer;
+import jastic.HTMLRenderer;
 
 import java.util.Map;
 
 public class Tag implements Renderable {
     private final String tag;
-    private Attribute[] attributes;
-    private Renderable[] childrenElements;
+    private final Attribute[] attributes;
+    private final Renderable[] childrenElements;
 
     public Tag(String tag, final Attribute[] attributes, final Renderable[] childrenElements) {
         this.tag = tag;
@@ -26,7 +25,7 @@ public class Tag implements Renderable {
         return childrenElements;
     }
     @Override
-    public String render(Map<String, Object> context, Renderer r) {
+    public String render(Map<String, Object> context, HTMLRenderer r) {
         return r.renderTag(context, attributes, tag, childrenElements);
     }
 
