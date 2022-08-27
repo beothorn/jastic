@@ -22,6 +22,8 @@ Generate websites or documentation with java.
 
 [ ] Html rendering
 
+[ ] CSS rendering 
+
 [ ] Dynamic analisys
 
 [ ] Published on maven central
