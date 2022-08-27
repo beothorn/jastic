@@ -1,28 +1,15 @@
 package jastic.basicElements;
 
 import jastic.Attribute;
-import jastic.DomElement;
-import jastic.Renderable;
 import jastic.HTMLRenderer;
+import jastic.Renderable;
 
 import java.util.Map;
 
-public class Html implements DomElement {
-    private final Attribute[] attributes;
-    private final Renderable[] childrenElements;
+public class Html extends Tag {
 
     public Html(final Attribute[] attributes, final Renderable[] childrenElements) {
-        this.attributes = attributes;
-        this.childrenElements = childrenElements;
-    }
-
-    @Override
-    public Attribute[] getAttributes() {
-        return attributes;
-    }
-
-    public Renderable[] getChildren() {
-        return childrenElements;
+        super("html", attributes, childrenElements);
     }
 
     @Override

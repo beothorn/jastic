@@ -8,7 +8,7 @@ import java.util.Map;
 public class Id implements Attribute {
     private final String value;
 
-    public Id(String value){
+    public Id(String value) {
         this.value = value;
     }
 

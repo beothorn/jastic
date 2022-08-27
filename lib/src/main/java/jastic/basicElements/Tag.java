@@ -1,12 +1,13 @@
 package jastic.basicElements;
 
 import jastic.Attribute;
-import jastic.Renderable;
+import jastic.DomElement;
 import jastic.HTMLRenderer;
+import jastic.Renderable;
 
 import java.util.Map;
 
-public class Tag implements Renderable {
+public class Tag implements DomElement {
     private final String tag;
     private final Attribute[] attributes;
     private final Renderable[] childrenElements;
@@ -24,6 +25,7 @@ public class Tag implements Renderable {
     public Renderable[] getChildren() {
         return childrenElements;
     }
+
     @Override
     public String render(Map<String, Object> context, HTMLRenderer r) {
         return r.renderTag(context, attributes, tag, childrenElements);

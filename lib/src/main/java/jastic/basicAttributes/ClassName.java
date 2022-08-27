@@ -8,7 +8,7 @@ import java.util.Map;
 public class ClassName implements Attribute {
     private final String value;
 
-    public ClassName(String value){
+    public ClassName(String value) {
         this.value = value;
     }
 

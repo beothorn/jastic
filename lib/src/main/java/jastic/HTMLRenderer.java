@@ -36,7 +36,7 @@ public class HTMLRenderer {
 
     public String render(Map<String, Object> context, Text text) {
         int level = 0;
-        if(context.containsKey("level")){
+        if (context.containsKey("level")) {
             level = (int) context.get("level");
         }
         return "\t".repeat(level) + text.getValue();
@@ -56,25 +56,25 @@ public class HTMLRenderer {
         return renderTag(Map.of(), tag.getAttributes(), tag.getTag(), tag.getChildren());
     }
 
-    public String render(Map<String, Object> context, Attribute[] attributes){
-        if(attributes == null) return "";
+    public String render(Map<String, Object> context, Attribute[] attributes) {
+        if (attributes == null) return "";
         return " " + Arrays.stream(attributes)
-            .map(element -> element.render(context, this))
-            .collect(Collectors.joining(" "));
+                .map(element -> element.render(context, this))
+                .collect(Collectors.joining(" "));
     }
 
     public String renderTag(Map<String, Object> context, Attribute[] attributes, String tag, Renderable[] children) {
         int level = 0;
-        if(context.containsKey("level")){
+        if (context.containsKey("level")) {
             level = (int) context.get("level");
         }
         Map<String, Object> newContext = new LinkedHashMap<>(context);
-        newContext.put("level", level+1);
+        newContext.put("level", level + 1);
         String renderedChildren = render(newContext, children);
         String renderedAttributes = render(newContext, attributes);
         return "\t".repeat(level) + "<" + tag + renderedAttributes + ">\n"
                 + renderedChildren + "\n"
-                +"\t".repeat(level) + "</" + tag + ">";
+                + "\t".repeat(level) + "</" + tag + ">";
     }
 
     public String render(Id id) {
@@ -86,10 +86,10 @@ public class HTMLRenderer {
     }
 
     public String render(Map<String, Object> context, Id id) {
-        return "id=\""+id.getValue()+"\"";
+        return "id=\"" + id.getValue() + "\"";
     }
 
     public String render(Map<String, Object> context, ClassName className) {
-        return "class=\""+className.getValue()+"\"";
+        return "class=\"" + className.getValue() + "\"";
     }
 }
