@@ -1,11 +1,11 @@
-package jastic.basicElements;
+package jastic.html.elements;
 
-import jastic.HTMLRenderer;
-import jastic.Renderable;
+import jastic.html.HTMLRenderable;
+import jastic.html.HTMLRenderer;
 
 import java.util.Map;
 
-public class Text implements Renderable {
+public class Text implements HTMLRenderable {
 
     private final String value;
 
@@ -19,6 +19,6 @@ public class Text implements Renderable {
 
     @Override
     public String render(Map<String, Object> context, HTMLRenderer r) {
-        return r.render(context, this);
+        return r.renderElementText(context, this);
     }
 }

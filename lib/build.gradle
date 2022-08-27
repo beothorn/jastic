@@ -3,6 +3,9 @@ plugins {
     id 'java-library'
 }
 
+sourceCompatibility = "15"
+targetCompatibility = "15"
+
 repositories {
     mavenCentral()
 }

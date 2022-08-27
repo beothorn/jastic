@@ -1,7 +1,7 @@
-package jastic;
+package jastic.html;
 
 import java.util.Map;
 
-public interface Renderable {
+public interface Attribute {
     String render(Map<String, Object> context, HTMLRenderer r);
 }
