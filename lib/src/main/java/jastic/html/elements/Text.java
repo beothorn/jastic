@@ -10,7 +10,12 @@ public class Text implements HTMLRenderable {
     private final String value;
 
     public Text(String value) {
-        this.value = value;
+        this.value = value
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll("\"", "&quot;")
+                .replaceAll("'", "&#39;");
     }
 
     public String getValue() {

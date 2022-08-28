@@ -6,13 +6,13 @@ package jastic.html;
 import jastic.html.attributes.Charset;
 import jastic.html.elements.Body;
 import jastic.html.elements.Text;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 import java.util.Stack;
 
 import static jastic.JasticHTML.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HTMLRendererTest {
 
@@ -40,7 +40,7 @@ class HTMLRendererTest {
                         text("Hello, World!")
                 )
         ));
-        Assertions.assertEquals("<html>\n" +
+        assertEquals("<html>\n" +
                 "html\t<body>\n" +
                 "body\t\tHello, World!\n" +
                 "\t</body>\n" +
@@ -50,7 +50,7 @@ class HTMLRendererTest {
     @Test
     void renderTag() {
         String actual = r.render(tag("test", text("foobar")));
-        Assertions.assertEquals("<test>\n" +
+        assertEquals("<test>\n" +
                 "\tfoobar\n" +
                 "</test>", actual);
     }
@@ -58,13 +58,13 @@ class HTMLRendererTest {
     @Test
     void renderManyElements() {
         String actual = r.render(text("foobar"), text("baz"));
-        Assertions.assertEquals("foobar\nbaz", actual);
+        assertEquals("foobar\nbaz", actual);
     }
 
     @Test
     void renderTagWithIdAndClass() {
         String actual = r.render(tag("test", attributes(id("bar"), className("foo")), text("foobar")));
-        Assertions.assertEquals("<test id=\"bar\" class=\"foo\">\n" +
+        assertEquals("<test id=\"bar\" class=\"foo\">\n" +
                 "\tfoobar\n" +
                 "</test>", actual);
     }
@@ -72,7 +72,7 @@ class HTMLRendererTest {
     @Test
     void renderText() {
         String actual = r.render(body(text("foobar")));
-        Assertions.assertEquals("<body>\n" +
+        assertEquals("<body>\n" +
                 "\tfoobar\n" +
                 "</body>", actual);
     }
@@ -80,7 +80,7 @@ class HTMLRendererTest {
     @Test
     void renderBody() {
         String actual = r.render(body(text("foobar")));
-        Assertions.assertEquals("<body>\n" +
+        assertEquals("<body>\n" +
                 "\tfoobar\n" +
                 "</body>", actual);
     }
@@ -88,13 +88,13 @@ class HTMLRendererTest {
     @Test
     void renderHead() {
         String actual = r.render(head());
-        Assertions.assertEquals("<head></head>", actual);
+        assertEquals("<head></head>", actual);
     }
 
     @Test
     void renderTitle() {
         String actual = r.render(title(text("foo")));
-        Assertions.assertEquals("<title>\n\tfoo\n</title>", actual);
+        assertEquals("<title>\n\tfoo\n</title>", actual);
     }
 
     @Test
@@ -104,6 +104,6 @@ class HTMLRendererTest {
                         charset(Charset.Name.UTF8)
                 )
         ));
-        Assertions.assertEquals("<meta charset=\"UTF-8\" />", actual);
+        assertEquals("<meta charset=\"UTF-8\" />", actual);
     }
 }
