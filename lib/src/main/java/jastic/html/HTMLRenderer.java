@@ -43,6 +43,10 @@ public class HTMLRenderer {
         return renderPairedTag(context, body.getAttributes(), body, body.getChildren());
     }
 
+    public String renderElementTitle(Map<String, Object> context, Title title) {
+        return renderPairedTag(context, title.getAttributes(), title, title.getChildren());
+    }
+
     public String renderElementText(Map<String, Object> context, Text text) {
         Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
         int level = tags.size();

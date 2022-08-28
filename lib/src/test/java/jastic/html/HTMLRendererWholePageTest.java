@@ -1,6 +1,5 @@
-package jastic;
+package jastic.html;
 
-import jastic.html.HTMLRenderer;
 import jastic.html.attributes.Charset;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,8 @@ public class HTMLRendererWholePageTest {
         HTMLRenderer r = new HTMLRenderer();
         String actual = r.render(html(
                 head(
-                        meta(attributes(charset(Charset.Name.UTF8)))
+                        meta(attributes(charset(Charset.Name.UTF8))),
+                        title(text("Hello"))
                 ),
                 body(
                         text("Hello, World!")
@@ -24,6 +24,9 @@ public class HTMLRendererWholePageTest {
                 <html>
                 	<head>
                 		<meta charset="UTF-8" />
+                		<title>
+                			Hello
+                		</title>
                 	</head>
                 	<body>
                 		Hello, World!

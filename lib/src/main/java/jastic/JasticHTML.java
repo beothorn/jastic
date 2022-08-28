@@ -45,6 +45,14 @@ public class JasticHTML {
         return new Head(attributes, children);
     }
 
+    public static Title title(HTMLRenderable... children) {
+        return title(new Attribute[0], children);
+    }
+
+    public static Title title(Attribute[] attributes, HTMLRenderable... children) {
+        return new Title(attributes, children);
+    }
+
     public static Meta meta(Attribute[] attributes) {
         return new Meta(attributes);
     }
