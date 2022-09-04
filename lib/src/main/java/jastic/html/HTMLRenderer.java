@@ -45,10 +45,28 @@ public class HTMLRenderer {
         return renderPairedTag(context, title.getAttributes(), title, title.getChildren());
     }
 
+    public String renderElementLink(final Map<String, Object> context, final Link link) {
+        return renderSingleTag(context, link.getAttributes(), link);
+    }
+
+    public String renderElementDiv(final Map<String, Object> context, final Div div) {
+        return renderPairedTag(context, div.getAttributes(), div, div.getChildren());
+    }
+
+    public String renderElementScript(final Map<String, Object> context, final Script script) {
+        return renderPairedTag(context, script.getAttributes(), script, script.getChildren());
+    }
+
     public String renderElementText(final Map<String, Object> context, final Text text) {
         final Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
         final int level = tags.size();
         return "\t".repeat(level) + text.getValue();
+    }
+
+    public String renderElementRawText(final Map<String, Object> context, final RawText rawText) {
+        final Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
+        final int level = tags.size();
+        return "\t".repeat(level) + rawText.getValue();
     }
 
     public String renderPairedTag(final Map<String, Object> context, final Attribute[] attributes, final DomElement tag, final HTMLRenderable[] children) {
@@ -97,6 +115,18 @@ public class HTMLRenderer {
             case ISO8859 -> "ISO-8859-1";
         };
         return "charset=\"" + charsetString + "\"";
+    }
+
+    public String renderAttributeRel(final Map<String, Object> context, final Rel relation) {
+        return "rel=\"" + relation.getValue() + "\"";
+    }
+
+    public String renderAttributeHRef(final Map<String, Object> context, final HRef href) {
+        return "href=\"" + href.getValue() + "\"";
+    }
+
+    public String renderAttributeType(final Map<String, Object> context, final Type type) {
+        return "type=\"" + type.getValue() + "\"";
     }
 
     private String render(final Map<String, Object>

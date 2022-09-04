@@ -15,10 +15,22 @@ public class HTMLRendererWholePageTest {
                 head(
                         meta(attributes(charset(Charset.Name.UTF8))),
                         title(text("Hello")),
-                        meta(attributes(name("viewport"), content("width=device-width, initial-scale=1")))
+                        meta(attributes(name("viewport"), content("width=device-width, initial-scale=1"))),
+                        link(attributes(rel("stylesheet"), href("/styles.css"), type("text/css")))
                 ),
                 body(
-                        text("Hello, World!")
+                        attributes(
+                                id("hello-body")
+                        ),
+                        div(
+                                attributes(
+                                        id("container")
+                                ),
+                                script(
+                                        rawText("console.log('hello')")
+                                ),
+                                text("Hello, World!")
+                        )
                 )
         ));
         final String expected = """
@@ -29,9 +41,15 @@ public class HTMLRendererWholePageTest {
                 			Hello
                 		</title>
                 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+                		<link rel="stylesheet" href="/styles.css" type="text/css" />
                 	</head>
-                	<body>
-                		Hello, World!
+                	<body id="hello-body">
+                		<div id="container">
+                			<script>
+                				console.log('hello')
+                			</script>
+                			Hello, World!
+                		</div>
                 	</body>
                 </html>""";
         Assertions.assertEquals(expected, actual);

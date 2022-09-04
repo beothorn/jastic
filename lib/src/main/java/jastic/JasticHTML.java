@@ -43,6 +43,22 @@ public class JasticHTML {
         return new Head(attributes, children);
     }
 
+    public static Div div(final HTMLRenderable... children) {
+        return div(new Attribute[0], children);
+    }
+
+    public static Div div(final Attribute[] attributes, final HTMLRenderable... children) {
+        return new Div(attributes, children);
+    }
+
+    public static Script script(final HTMLRenderable... children) {
+        return script(new Attribute[0], children);
+    }
+
+    public static Script script(final Attribute[] attributes, final HTMLRenderable... children) {
+        return new Script(attributes, children);
+    }
+
     public static Title title(final HTMLRenderable... children) {
         return title(new Attribute[0], children);
     }
@@ -55,8 +71,16 @@ public class JasticHTML {
         return new Meta(attributes);
     }
 
+    public static Link link(final Attribute[] attributes) {
+        return new Link(attributes);
+    }
+
     public static Text text(final String text) {
         return new Text(text);
+    }
+
+    public static RawText rawText(final String text) {
+        return new RawText(text);
     }
 
     public static Id id(final String id) {
@@ -77,5 +101,17 @@ public class JasticHTML {
 
     public static Charset charset(final Charset.Name charset) {
         return new Charset(charset);
+    }
+
+    public static Rel rel(final String rel) {
+        return new Rel(rel);
+    }
+
+    public static HRef href(final String href) {
+        return new HRef(href);
+    }
+
+    public static Type type(final String type) {
+        return new Type(type);
     }
 }

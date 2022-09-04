@@ -91,11 +91,47 @@ class HTMLRendererTest {
     }
 
     @Test
+    void renderTagWithRelation() {
+        final String actual = r.render(tag("test", attributes(rel("foo")), text("foobar")));
+        assertEquals("""
+                <test rel="foo">
+                \tfoobar
+                </test>""", actual);
+    }
+
+    @Test
+    void renderTagWithType() {
+        final String actual = r.render(tag("test", attributes(type("foo")), text("foobar")));
+        assertEquals("""
+                <test type="foo">
+                \tfoobar
+                </test>""", actual);
+    }
+
+    @Test
+    void renderTagWithHRef() {
+        final String actual = r.render(tag("test", attributes(href("foo")), text("foobar")));
+        assertEquals("""
+                <test href="foo">
+                \tfoobar
+                </test>""", actual);
+    }
+
+    @Test
     void renderText() {
         final String actual = r.render(body(text("foobar")));
         assertEquals("""
                 <body>
                 \tfoobar
+                </body>""", actual);
+    }
+
+    @Test
+    void renderRawText() {
+        final String actual = r.render(body(rawText("foobar<nonescaped/>")));
+        assertEquals("""
+                <body>
+                \tfoobar<nonescaped/>
                 </body>""", actual);
     }
 
@@ -128,5 +164,29 @@ class HTMLRendererTest {
                 )
         ));
         assertEquals("<meta charset=\"UTF-8\" />", actual);
+    }
+
+    @Test
+    void renderDiv() {
+        final String actual = r.render(div(text("foobar")));
+        assertEquals("""
+                <div>
+                \tfoobar
+                </div>""", actual);
+    }
+
+    @Test
+    void renderScript() {
+        final String actual = r.render(script(text("foobar")));
+        assertEquals("""
+                <script>
+                \tfoobar
+                </script>""", actual);
+    }
+
+    @Test
+    void renderLink() {
+        final String actual = r.render(link(attributes()));
+        assertEquals("<link />", actual);
     }
 }
