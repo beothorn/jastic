@@ -185,6 +185,15 @@ class HTMLRendererTest {
     }
 
     @Test
+    void renderNoScript() {
+        final String actual = r.render(noScript(text("foobar")));
+        assertEquals("""
+                <noscript>
+                \tfoobar
+                </noscript>""", actual);
+    }
+
+    @Test
     void renderLink() {
         final String actual = r.render(link(attributes()));
         assertEquals("<link />", actual);

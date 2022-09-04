@@ -29,6 +29,9 @@ public class HTMLRendererWholePageTest {
                                 script(
                                         rawText("console.log('hello')")
                                 ),
+                                noScript(
+                                        text("Please enable JavaScript to view")
+                                ),
                                 text("Hello, World!")
                         )
                 )
@@ -48,6 +51,7 @@ public class HTMLRendererWholePageTest {
                 			<script>
                 				console.log('hello')
                 			</script>
+                			<noscript>Please enable JavaScript to view</noscript>
                 			Hello, World!
                 		</div>
                 	</body>

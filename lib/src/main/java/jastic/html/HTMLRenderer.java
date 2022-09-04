@@ -57,6 +57,10 @@ public class HTMLRenderer {
         return renderPairedTag(context, script.getAttributes(), script, script.getChildren());
     }
 
+    public String renderElementNoScript(final Map<String, Object> context, final NoScript noscript) {
+        return renderPairedTag(context, noscript.getAttributes(), noscript, noscript.getChildren());
+    }
+
     public String renderElementText(final Map<String, Object> context, final Text text) {
         final Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
         final int level = tags.size();

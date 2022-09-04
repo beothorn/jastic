@@ -59,6 +59,14 @@ public class JasticHTML {
         return new Script(attributes, children);
     }
 
+    public static NoScript noScript(final HTMLRenderable... children) {
+        return noScript(new Attribute[0], children);
+    }
+
+    public static NoScript noScript(final Attribute[] attributes, final HTMLRenderable... children) {
+        return new NoScript(attributes, children);
+    }
+
     public static Title title(final HTMLRenderable... children) {
         return title(new Attribute[0], children);
     }
