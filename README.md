@@ -22,9 +22,11 @@ Generate websites or documentation with java.
 
 [ ] Html rendering
 
-[ ] CSS rendering 
+[ ] CSS rendering
 
 [ ] Dynamic analisys
+
+[ ] Tree diff
 
 [ ] Published on maven central
 
@@ -44,8 +46,8 @@ public class HTMLRendererWholePageTest {
 
     @Test
     void render() {
-        HTMLRenderer r = new HTMLRenderer();
-        String actual = r.render(html(
+        final HTMLRenderer r = new HTMLRenderer();
+        final String actual = r.render(html(
                 head(
                         meta(attributes(charset(Charset.Name.UTF8)))
                 ),
@@ -53,7 +55,7 @@ public class HTMLRendererWholePageTest {
                         text("Hello, World!")
                 )
         ));
-        String expected = """
+        final String expected = """
                 <html>
                 	<head>
                 		<meta charset="UTF-8" />

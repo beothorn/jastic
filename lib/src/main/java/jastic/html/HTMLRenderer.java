@@ -1,8 +1,6 @@
 package jastic.html;
 
-import jastic.html.attributes.Charset;
-import jastic.html.attributes.ClassName;
-import jastic.html.attributes.Id;
+import jastic.html.attributes.*;
 import jastic.html.elements.*;
 
 import java.util.Arrays;
@@ -15,85 +13,94 @@ public class HTMLRenderer {
 
     public static final String CONTEXT_STACK = "stack";
 
-    public String render(HTMLRenderable... elements) {
-        HashMap<String, Object> context = new HashMap<>();
+    public String render(final HTMLRenderable... elements) {
+        final HashMap<String, Object> context = new HashMap<>();
         context.put("stack", new Stack<>());
         return render(context, elements);
     }
 
-    public String render(Map<String, Object> context, HTMLRenderable[] elements) {
+    public String render(final Map<String, Object> context, final HTMLRenderable[] elements) {
         return Arrays.stream(elements)
                 .map(element -> element.render(context, this))
                 .collect(Collectors.joining("\n"));
     }
 
-    public String renderElementHtml(Map<String, Object> context, Html html) {
+    public String renderElementHtml(final Map<String, Object> context, final Html html) {
         return renderPairedTag(context, html.getAttributes(), html, html.getChildren());
     }
 
-    public String renderElementHead(Map<String, Object> context, Head head) {
+    public String renderElementHead(final Map<String, Object> context, final Head head) {
         return renderPairedTag(context, head.getAttributes(), head, head.getChildren());
     }
 
-    public String renderElementMeta(Map<String, Object> context, Meta meta) {
+    public String renderElementMeta(final Map<String, Object> context, final Meta meta) {
         return renderSingleTag(context, meta.getAttributes(), meta);
     }
 
-    public String renderElementBody(Map<String, Object> context, Body body) {
+    public String renderElementBody(final Map<String, Object> context, final Body body) {
         return renderPairedTag(context, body.getAttributes(), body, body.getChildren());
     }
 
-    public String renderElementTitle(Map<String, Object> context, Title title) {
+    public String renderElementTitle(final Map<String, Object> context, final Title title) {
         return renderPairedTag(context, title.getAttributes(), title, title.getChildren());
     }
 
-    public String renderElementText(Map<String, Object> context, Text text) {
-        Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
-        int level = tags.size();
+    public String renderElementText(final Map<String, Object> context, final Text text) {
+        final Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
+        final int level = tags.size();
         return "\t".repeat(level) + text.getValue();
     }
 
-    public String renderPairedTag(Map<String, Object> context, Attribute[] attributes, DomElement tag, HTMLRenderable[] children) {
-        Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
-        int level = tags.size();
+    public String renderPairedTag(final Map<String, Object> context, final Attribute[] attributes, final DomElement tag, final HTMLRenderable[] children) {
+        final Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
+        final int level = tags.size();
         tags.push(tag);
         String renderedChildren = "";
         if (children.length > 0) {
             renderedChildren = "\n" + render(context, children) + "\n";
         }
-        String renderedAttributes = render(context, attributes);
+        final String renderedAttributes = render(context, attributes);
         tags.pop();
         return "\t".repeat(level) + "<" + tag.getTag() + renderedAttributes + ">"
                 + renderedChildren
                 + "\t".repeat(level) + "</" + tag.getTag() + ">";
     }
 
-    public String renderSingleTag(Map<String, Object> context, Attribute[] attributes, DomElement tag) {
-        Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
-        int level = tags.size();
+    public String renderSingleTag(final Map<String, Object> context, final Attribute[] attributes, final DomElement tag) {
+        final Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
+        final int level = tags.size();
         tags.push(tag);
-        String renderedAttributes = render(context, attributes);
+        final String renderedAttributes = render(context, attributes);
         tags.pop();
         return "\t".repeat(level) + "<" + tag.getTag() + renderedAttributes + " />";
     }
 
-    public String renderAttributeId(Map<String, Object> context, Id id) {
+    public String renderAttributeId(final Map<String, Object> context, final Id id) {
         return "id=\"" + id.getValue() + "\"";
     }
 
-    public String renderAttributeClassName(Map<String, Object> context, ClassName className) {
+    public String renderAttributeClassName(final Map<String, Object> context, final ClassName className) {
         return "class=\"" + className.getValue() + "\"";
     }
 
-    public String renderAttributeCharset(Map<String, Object> context, Charset charset) {
-        String charsetString = switch (charset.getValue()) {
+    public String renderAttributeName(final Map<String, Object> context, final Name className) {
+        return "name=\"" + className.getValue() + "\"";
+    }
+
+    public String renderAttributeContent(final Map<String, Object> context, final Content content) {
+        return "content=\"" + content.getValue() + "\"";
+    }
+
+    public String renderAttributeCharset(final Charset charset) {
+        final String charsetString = switch (charset.getValue()) {
             case UTF8 -> "UTF-8";
             case ISO8859 -> "ISO-8859-1";
         };
         return "charset=\"" + charsetString + "\"";
     }
 
-    private String render(Map<String, Object> context, Attribute[] attributes) {
+    private String render(final Map<String, Object>
+                                  context, final Attribute[] attributes) {
         if (attributes.length == 0) return "";
         return " " + Arrays.stream(attributes)
                 .map(element -> element.render(context, this))

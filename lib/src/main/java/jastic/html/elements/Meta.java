@@ -12,7 +12,7 @@ public class Meta extends SingleTag {
     }
 
     @Override
-    public String render(Map<String, Object> context, HTMLRenderer r) {
+    public String render(final Map<String, Object> context, final HTMLRenderer r) {
         return r.renderElementMeta(context, this);
     }
 }

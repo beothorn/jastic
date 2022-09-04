@@ -13,7 +13,7 @@ public class Html extends PairedTag {
     }
 
     @Override
-    public String render(Map<String, Object> context, HTMLRenderer r) {
+    public String render(final Map<String, Object> context, final HTMLRenderer r) {
         return r.renderElementHtml(context, this);
     }
 }

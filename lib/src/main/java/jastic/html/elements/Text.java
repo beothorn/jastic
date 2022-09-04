@@ -9,7 +9,7 @@ public class Text implements HTMLRenderable {
 
     private final String value;
 
-    public Text(String value) {
+    public Text(final String value) {
         this.value = value
                 .replaceAll("&", "&amp;")
                 .replaceAll("<", "&lt;")
@@ -23,7 +23,7 @@ public class Text implements HTMLRenderable {
     }
 
     @Override
-    public String render(Map<String, Object> context, HTMLRenderer r) {
+    public String render(final Map<String, Object> context, final HTMLRenderer r) {
         return r.renderElementText(context, this);
     }
 }

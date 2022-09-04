@@ -10,7 +10,7 @@ public class SingleTag implements DomElement {
     private final String tag;
     private final Attribute[] attributes;
 
-    public SingleTag(String tag, final Attribute[] attributes) {
+    public SingleTag(final String tag, final Attribute[] attributes) {
         this.tag = tag;
         this.attributes = attributes;
     }
@@ -21,7 +21,7 @@ public class SingleTag implements DomElement {
     }
 
     @Override
-    public String render(Map<String, Object> context, HTMLRenderer r) {
+    public String render(final Map<String, Object> context, final HTMLRenderer r) {
         return r.renderSingleTag(context, attributes, this);
     }
 

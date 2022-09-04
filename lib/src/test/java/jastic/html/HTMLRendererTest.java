@@ -20,86 +20,109 @@ class HTMLRendererTest {
 
     @Test
     void renderOverwritten() {
-        HTMLRenderer stackRenderer = new HTMLRenderer() {
+        final HTMLRenderer stackRenderer = new HTMLRenderer() {
 
             @Override
             public String renderElementBody(final Map<String, Object> context, final Body body) {
-                Stack<DomElement> stack = (Stack<DomElement>) context.get("stack");
+                final Stack<DomElement> stack = (Stack<DomElement>) context.get("stack");
                 return stack.peek().getTag() + super.renderElementBody(context, body);
             }
 
             @Override
             public String renderElementText(final Map<String, Object> context, final Text text) {
-                Stack<DomElement> stack = (Stack<DomElement>) context.get("stack");
+                final Stack<DomElement> stack = (Stack<DomElement>) context.get("stack");
                 return stack.peek().getTag() + super.renderElementText(context, text);
             }
         };
 
-        String actual = stackRenderer.render(html(
+        final String actual = stackRenderer.render(html(
                 body(
                         text("Hello, World!")
                 )
         ));
-        assertEquals("<html>\n" +
-                "html\t<body>\n" +
-                "body\t\tHello, World!\n" +
-                "\t</body>\n" +
-                "</html>", actual);
+        assertEquals("""
+                <html>
+                html\t<body>
+                body\t\tHello, World!
+                \t</body>
+                </html>""", actual);
     }
 
     @Test
     void renderTag() {
-        String actual = r.render(tag("test", text("foobar")));
-        assertEquals("<test>\n" +
-                "\tfoobar\n" +
-                "</test>", actual);
+        final String actual = r.render(tag("test", text("foobar")));
+        assertEquals("""
+                <test>
+                \tfoobar
+                </test>""", actual);
     }
 
     @Test
     void renderManyElements() {
-        String actual = r.render(text("foobar"), text("baz"));
+        final String actual = r.render(text("foobar"), text("baz"));
         assertEquals("foobar\nbaz", actual);
     }
 
     @Test
     void renderTagWithIdAndClass() {
-        String actual = r.render(tag("test", attributes(id("bar"), className("foo")), text("foobar")));
-        assertEquals("<test id=\"bar\" class=\"foo\">\n" +
-                "\tfoobar\n" +
-                "</test>", actual);
+        final String actual = r.render(tag("test", attributes(id("bar"), className("foo")), text("foobar")));
+        assertEquals("""
+                <test id="bar" class="foo">
+                \tfoobar
+                </test>""", actual);
+    }
+
+    @Test
+    void renderTagWithName() {
+        final String actual = r.render(tag("test", attributes(name("foo")), text("foobar")));
+        assertEquals("""
+                <test name="foo">
+                \tfoobar
+                </test>""", actual);
+    }
+
+    @Test
+    void renderTagWithContent() {
+        final String actual = r.render(tag("test", attributes(content("foo")), text("foobar")));
+        assertEquals("""
+                <test content="foo">
+                \tfoobar
+                </test>""", actual);
     }
 
     @Test
     void renderText() {
-        String actual = r.render(body(text("foobar")));
-        assertEquals("<body>\n" +
-                "\tfoobar\n" +
-                "</body>", actual);
+        final String actual = r.render(body(text("foobar")));
+        assertEquals("""
+                <body>
+                \tfoobar
+                </body>""", actual);
     }
 
     @Test
     void renderBody() {
-        String actual = r.render(body(text("foobar")));
-        assertEquals("<body>\n" +
-                "\tfoobar\n" +
-                "</body>", actual);
+        final String actual = r.render(body(text("foobar")));
+        assertEquals("""
+                <body>
+                \tfoobar
+                </body>""", actual);
     }
 
     @Test
     void renderHead() {
-        String actual = r.render(head());
+        final String actual = r.render(head());
         assertEquals("<head></head>", actual);
     }
 
     @Test
     void renderTitle() {
-        String actual = r.render(title(text("foo")));
+        final String actual = r.render(title(text("foo")));
         assertEquals("<title>\n\tfoo\n</title>", actual);
     }
 
     @Test
     void renderMetaCharset() {
-        String actual = r.render(meta(
+        final String actual = r.render(meta(
                 attributes(
                         charset(Charset.Name.UTF8)
                 )

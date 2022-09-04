@@ -13,7 +13,7 @@ public class Body extends PairedTag {
     }
 
     @Override
-    public String render(Map<String, Object> context, HTMLRenderer r) {
+    public String render(final Map<String, Object> context, final HTMLRenderer r) {
         return r.renderElementBody(context, this);
     }
 }

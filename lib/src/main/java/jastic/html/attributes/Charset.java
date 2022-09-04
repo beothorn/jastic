@@ -9,13 +9,13 @@ public class Charset implements Attribute {
 
     private final Name value;
 
-    public Charset(Name value) {
+    public Charset(final Name value) {
         this.value = value;
     }
 
     @Override
-    public String render(Map<String, Object> context, HTMLRenderer r) {
-        return r.renderAttributeCharset(context, this);
+    public String render(final Map<String, Object> context, final HTMLRenderer r) {
+        return r.renderAttributeCharset(this);
     }
 
     public Name getValue() {

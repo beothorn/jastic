@@ -12,7 +12,7 @@ public class PairedTag implements DomElement {
     private final Attribute[] attributes;
     private final HTMLRenderable[] childrenElements;
 
-    public PairedTag(String tag, final Attribute[] attributes, final HTMLRenderable[] childrenElements) {
+    public PairedTag(final String tag, final Attribute[] attributes, final HTMLRenderable[] childrenElements) {
         this.tag = tag;
         this.attributes = attributes;
         this.childrenElements = childrenElements;
@@ -28,7 +28,7 @@ public class PairedTag implements DomElement {
     }
 
     @Override
-    public String render(Map<String, Object> context, HTMLRenderer r) {
+    public String render(final Map<String, Object> context, final HTMLRenderer r) {
         return r.renderPairedTag(context, attributes, this, childrenElements);
     }
 

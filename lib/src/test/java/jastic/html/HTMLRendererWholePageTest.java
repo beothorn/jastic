@@ -10,23 +10,25 @@ public class HTMLRendererWholePageTest {
 
     @Test
     void render() {
-        HTMLRenderer r = new HTMLRenderer();
-        String actual = r.render(html(
+        final HTMLRenderer r = new HTMLRenderer();
+        final String actual = r.render(html(
                 head(
                         meta(attributes(charset(Charset.Name.UTF8))),
-                        title(text("Hello"))
+                        title(text("Hello")),
+                        meta(attributes(name("viewport"), content("width=device-width, initial-scale=1")))
                 ),
                 body(
                         text("Hello, World!")
                 )
         ));
-        String expected = """
+        final String expected = """
                 <html>
                 	<head>
                 		<meta charset="UTF-8" />
                 		<title>
                 			Hello
                 		</title>
+                		<meta name="viewport" content="width=device-width, initial-scale=1" />
                 	</head>
                 	<body>
                 		Hello, World!
