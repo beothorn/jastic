@@ -24,7 +24,11 @@ Generate websites or documentation with java.
 
 [ ] CSS rendering
 
-[ ] Dynamic analisys
+[ ] RSS rendering
+
+[ ] Strict Html rendering (compile time)
+
+[ ] Dynamic analisys (runtime)
 
 [ ] Tree diff
 

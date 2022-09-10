@@ -83,12 +83,52 @@ public class JasticHTML {
         return new Link(attributes);
     }
 
+    public static Img img(final Attribute[] attributes) {
+        return new Img(attributes);
+    }
+
     public static Text text(final String text) {
         return new Text(text);
     }
 
     public static RawText rawText(final String text) {
         return new RawText(text);
+    }
+
+    public static Br br() {
+        return new Br();
+    }
+
+    public static A a(final HTMLRenderable... children) {
+        return a(new Attribute[0], children);
+    }
+
+    public static A a(final Attribute[] attributes, final HTMLRenderable... children) {
+        return new A(attributes, children);
+    }
+
+    public static Span span(final HTMLRenderable... children) {
+        return span(new Attribute[0], children);
+    }
+
+    public static Span span(final Attribute[] attributes, final HTMLRenderable... children) {
+        return new Span(attributes, children);
+    }
+
+    public static P p(final HTMLRenderable... children) {
+        return p(new Attribute[0], children);
+    }
+
+    public static P p(final Attribute[] attributes, final HTMLRenderable... children) {
+        return new P(attributes, children);
+    }
+
+    public static H h(final int level, final HTMLRenderable... children) {
+        return h(level, new Attribute[0], children);
+    }
+
+    public static H h(final int level, final Attribute[] attributes, final HTMLRenderable... children) {
+        return new H(level, attributes, children);
     }
 
     public static Id id(final String id) {
@@ -121,5 +161,9 @@ public class JasticHTML {
 
     public static Type type(final String type) {
         return new Type(type);
+    }
+
+    public static Src src(final String source) {
+        return new Src(source);
     }
 }

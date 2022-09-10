@@ -118,6 +118,15 @@ class HTMLRendererTest {
     }
 
     @Test
+    void renderTagWithSrc() {
+        final String actual = r.render(tag("test", attributes(src("foo")), text("foobar")));
+        assertEquals("""
+                <test src="foo">
+                \tfoobar
+                </test>""", actual);
+    }
+
+    @Test
     void renderText() {
         final String actual = r.render(body(text("foobar")));
         assertEquals("""
@@ -185,6 +194,46 @@ class HTMLRendererTest {
     }
 
     @Test
+    void renderA() {
+        final String actual = r.render(a(text("foobar")));
+        assertEquals("""
+                <a>
+                \tfoobar
+                </a>""", actual);
+    }
+
+    @Test
+    void renderP() {
+        final String actual = r.render(p(text("foobar")));
+        assertEquals("""
+                <p>
+                \tfoobar
+                </p>""", actual);
+    }
+
+    @Test
+    void renderSpan() {
+        final String actual = r.render(span(text("foobar")));
+        assertEquals("""
+                <span>
+                \tfoobar
+                </span>""", actual);
+    }
+
+    @Test
+    void renderH() {
+        assertEquals("""
+                <h1>
+                \tfoobar
+                </h1>""", r.render(h(1, text("foobar"))));
+
+        assertEquals("""
+                <h2>
+                \tfoobar
+                </h2>""", r.render(h(2, text("foobar"))));
+    }
+
+    @Test
     void renderNoScript() {
         final String actual = r.render(noScript(text("foobar")));
         assertEquals("""
@@ -194,8 +243,20 @@ class HTMLRendererTest {
     }
 
     @Test
+    void renderLineBreak() {
+        final String actual = r.render(br());
+        assertEquals("<br>", actual);
+    }
+
+    @Test
     void renderLink() {
         final String actual = r.render(link(attributes()));
         assertEquals("<link />", actual);
+    }
+
+    @Test
+    void renderImg() {
+        final String actual = r.render(img(attributes()));
+        assertEquals("<img />", actual);
     }
 }

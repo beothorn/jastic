@@ -49,6 +49,10 @@ public class HTMLRenderer {
         return renderSingleTag(context, link.getAttributes(), link);
     }
 
+    public String renderElementImg(final Map<String, Object> context, final Img img) {
+        return renderSingleTag(context, img.getAttributes(), img);
+    }
+
     public String renderElementDiv(final Map<String, Object> context, final Div div) {
         return renderPairedTag(context, div.getAttributes(), div, div.getChildren());
     }
@@ -71,6 +75,27 @@ public class HTMLRenderer {
         final Stack<DomElement> tags = (Stack<DomElement>) context.get(CONTEXT_STACK);
         final int level = tags.size();
         return "\t".repeat(level) + rawText.getValue();
+    }
+
+    public String renderElementBr(final Map<String, Object> context, final Br br) {
+        final int level = ((Stack<DomElement>) context.get(CONTEXT_STACK)).size();
+        return "\t".repeat(level) + "<br>";
+    }
+
+    public String renderElementA(final Map<String, Object> context, final A a) {
+        return renderPairedTag(context, a.getAttributes(), a, a.getChildren());
+    }
+
+    public String renderElementP(final Map<String, Object> context, final P p) {
+        return renderPairedTag(context, p.getAttributes(), p, p.getChildren());
+    }
+
+    public String renderElementSpan(final Map<String, Object> context, final Span span) {
+        return renderPairedTag(context, span.getAttributes(), span, span.getChildren());
+    }
+
+    public String renderElementH(final Map<String, Object> context, final H h) {
+        return renderPairedTag(context, h.getAttributes(), h, h.getChildren());
     }
 
     public String renderPairedTag(final Map<String, Object> context, final Attribute[] attributes, final DomElement tag, final HTMLRenderable[] children) {
@@ -109,6 +134,10 @@ public class HTMLRenderer {
         return "name=\"" + className.getValue() + "\"";
     }
 
+    public String renderAttributeSrc(final Map<String, Object> context, final Src source) {
+        return "src=\"" + source.getValue() + "\"";
+    }
+
     public String renderAttributeContent(final Map<String, Object> context, final Content content) {
         return "content=\"" + content.getValue() + "\"";
     }
@@ -133,8 +162,7 @@ public class HTMLRenderer {
         return "type=\"" + type.getValue() + "\"";
     }
 
-    private String render(final Map<String, Object>
-                                  context, final Attribute[] attributes) {
+    private String render(final Map<String, Object> context, final Attribute[] attributes) {
         if (attributes.length == 0) return "";
         return " " + Arrays.stream(attributes)
                 .map(element -> element.render(context, this))
