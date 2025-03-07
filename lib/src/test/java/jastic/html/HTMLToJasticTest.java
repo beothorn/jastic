@@ -11,10 +11,11 @@ import java.nio.file.Paths;
 class HTMLToJasticTest {
 
     @Test
-    void renderTag() throws URISyntaxException, IOException {
+    void fromHtmlToJastic() throws URISyntaxException, IOException {
         final String simplePage = Files.readString(Paths.get(getClass().getResource("/htmlToJastic/simple.html").toURI())).trim();
         HTMLTransformer t = new HTMLTransformer();
 
+        String javaCode = t.toJava(simplePage);
         assertEquals("""
                 html(
                 \thead(
@@ -23,7 +24,7 @@ class HTMLToJasticTest {
                 \tbody(
                 \t)
                 )
-                """, t.toJava(simplePage));
+                """, javaCode);
     }
 
 }
